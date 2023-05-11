@@ -3,6 +3,8 @@ package com.tbdhealth.assignment.Controllers;
 import com.tbdhealth.assignment.Entities.Customer;
 import com.tbdhealth.assignment.Entities.Order;
 import com.tbdhealth.assignment.Entities.Product;
+import com.tbdhealth.assignment.Services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +15,15 @@ import java.util.Date;
 @RequestMapping(path = "order")
 public class OrderController {
 
+    private OrderService orderService;
+
+    @Autowired
+    public OrderController(OrderService orderService){
+        this.orderService = orderService;
+    }
     @GetMapping()
     public Order getOrders(){
-
-        Customer customer1 = new Customer("Rohit kumar" , "H no 87" , "9728706500");
-        Product product1 = new Product("Trimer" , 120.10 , 12);
-        Order order1 = new Order(product1 , customer1 , new Date());
-
-        return order1;
+        return this.orderService.sendOrders();
     }
 
 }
