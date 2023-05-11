@@ -23,4 +23,9 @@ public class Product {
     public int getQuantity() {
         return quantity;
     }
+
+    @Override
+    public String toString(){
+        return "{title : %s , price : %s , quantity ; %s}".formatted(this.title , this.price.toString() , this.quantity );
+    }
 }
